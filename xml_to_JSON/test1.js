@@ -1,7 +1,9 @@
-//
+// jshint esnext: true
+// jshint browser: true
+
 
 window.onload = function () {
-
+    'use strict';
     var products = new XMLHttpRequest();
     var stores = new XMLHttpRequest();
     var selection = new XMLHttpRequest();
@@ -15,11 +17,13 @@ window.onload = function () {
     products.send();
     stores.open('GET', 'butiker.xml', true);
     stores.send();
+    selection.open('GET', 'selection.xml', true);
+    selection.send();
 
     products.onreadystatechange = function() {
         if(products.readyState == 4 && products.status == 200) {
             // Converts the xml to JSON.
-            result = xmlToJSON.parseString(products.response, myOptions);
+            var result = xmlToJSON.parseString(products.response, myOptions);
             // Returns a list of objects representing the products
             var list = result.artiklar[0].artikel;
             // Returns a list of only the beer in the selection. The objects
@@ -41,13 +45,14 @@ window.onload = function () {
     stores.onreadystatechange = function() {
         if(stores.readyState == 4 && stores.status == 200) {
             // Converts the xml to JSON.
-            result = xmlToJSON.parseString(stores.response, myOptions);
+            var result = xmlToJSON.parseString(stores.response, myOptions);
             // Returns a list of objects representing the stores
             var list = result.ButikerOmbud[0].ButikOmbud;
             // Cleaning up the objects to make them easy to use.
             var butiker = list.reduce(function(acc, current) {
                     var butik = {};
                     for (var key in current) {
+                        // Removes every _attrtype.
                         if (key == '_attrtype') {
                             continue;
                         }
@@ -58,6 +63,22 @@ window.onload = function () {
                     }
                     return acc.concat(butik);
                 }, []);
+        }
+    };
+
+    selection.onreadystatechange = function() {
+        if(selection.readyState == 4 && selection.status == 200) {
+             // Converts the xml to JSON.
+            var result = xmlToJSON.parseString(selection.response, myOptions);
+            // Returns a list of objects representing the selection
+            var list = result.ButikArtikel[0].Butik;
+            // Returns an object with the store numbers as keys and the list of
+            // products as an array.
+            var butiker = list.reduce(function(acc, current) {
+                acc[current._attrButikNr._value] = current.ArtikelNr.
+                    reduce((a, b) => a.concat(b.key), []);
+                return acc;
+                }, {});
             console.log(JSON.stringify(butiker, null, 4));
         }
     };
