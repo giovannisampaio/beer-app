@@ -2,25 +2,25 @@
 
 window.onload = function () {
 
-    var articles = new XMLHttpRequest();
+    var products = new XMLHttpRequest();
     var stores = new XMLHttpRequest();
-    var sortiment = new XMLHttpRequest();
+    var selection = new XMLHttpRequest();
     var myOptions = {
         attrsAsObject: false,
         textKey: 'key',
         // xmlns: false,
     };
 
-    articles.open('GET', 'untitled.xml', true);
-    articles.send();
+    products.open('GET', 'untitled.xml', true);
+    products.send();
     stores.open('GET', 'butiker.xml', true);
     stores.send();
 
-    articles.onreadystatechange = function() {
-        if(articles.readyState == 4 && articles.status == 200) {
+    products.onreadystatechange = function() {
+        if(products.readyState == 4 && products.status == 200) {
             // Converts the xml to JSON.
-            result = xmlToJSON.parseString(articles.response, myOptions);
-            // Returns a list of objects representing the articles
+            result = xmlToJSON.parseString(products.response, myOptions);
+            // Returns a list of objects representing the products
             var list = result.artiklar[0].artikel;
             // Returns a list of only the beer in the selection. The objects
             // are cleaned up to be easy to use.
@@ -58,7 +58,7 @@ window.onload = function () {
                     }
                     return acc.concat(butik);
                 }, []);
-            console.log(JSON.stringify(butiker));
+            console.log(JSON.stringify(butiker, null, 4));
         }
     };
 
