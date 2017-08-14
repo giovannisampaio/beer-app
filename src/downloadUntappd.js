@@ -1,7 +1,20 @@
+//jshint esnext: true
+
 require('dotenv').config();
 var request = require('request');
 var https = require('https');
 
 var client_id = process.env.CLIENT_ID;
 var client_secret = process.env.CLIENT_SECRET;
-console.log(client_id, client_secret)
+var token = '?access_token=' + process.env.TOKEN;
+var address = 'https://api.untappd.com/v4/';
+var beer_method = 'beer/info';
+var bid = '/16630';
+
+https.get(address + beer_method + bid + token, function(res) {
+    console.log(address + beer_method + bid + token);
+    res.setEncoding('utf8');
+    var str = '';
+    res.on('data', (d) => str += d);
+    res.on('end', () => console.log(JSON.stringify(4, null, str)));
+});
