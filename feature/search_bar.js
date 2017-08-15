@@ -23,15 +23,16 @@ var beerDatabase = [
         origin: "usa"
     }
 ];
-
+//text input field, drop down, results area respectively
 const queryEl = document.getElementById('query');
 const filterEl = document.getElementById('filter');
 const resultsEl = document.getElementById('results');
 
+//trimming the whitespace off the user input
 const search = () => {
     const key = filterEl.value;
     const value = queryEl.value.trim();
-
+//if user input is not an empty string : filter through the beer DB for matching character, append to results
     resultsEl.innerHTML = ! value ? '' : beerDatabase
         .filter(beer => beer[key].toLowerCase().indexOf(value.toLowerCase()) !== -1)
         .map(({name, style, origin}) => `<div>${name}, ${style} (${origin})</div>`)
