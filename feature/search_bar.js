@@ -1,4 +1,8 @@
 "use strict";
+alert("connected");
+$( document ).ready(function(){
+    $(".dropdown-button").dropdown();
+});
 
 //Dummy database of beers
 var beerDatabase = [

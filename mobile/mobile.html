@@ -3,55 +3,51 @@
 <head>
     <meta name="viewport" content="width-device-width, initial-scale=1">
     <title>Mobile Design</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="mobile.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+
+
 </head>
 <body>
-<div class="jumbotron">
-    <div class="logo-spacer"></div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <!-- Col-sm-2: for centering search bar -->
-            <div class="col-sm-8">
-                <!-- Col-sm-8: search bar col -->
-                <div class="input-group">
-                    <div class="input-group-btn search-panel">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span id="search_concept">All</span> <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a data-value="name">Name</a></li>
-                            <li><a data-value="style">Style</a></li>
-                            <li><a data-value="origin">Origin</a></li>
-                        </ul>
-                    </div>
-                    <input type="hidden" name="search_param" value="all" id="search_param">
-                    <input type="text" class="form-control" name="x" placeholder="Search">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                             <i class="fa fa-search"></i>
-                        </button>
-                    </span>
+<div class="row grey lighten-2">
+    <div class="row">
+        <div class="col s12">
+            <div class="logo-spacer"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s2"></div>
+        <div class="col s8 center">
+            <nav>
+                <div class="nav-wrapper">
+                    <form>
+                        <div class="input-field grey lighten-3">
+                            <ul class="left">
+                                <!-- Dropdown Trigger -->
+                                <li><a class="dropdown-button black-text" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+                            </ul>
+                            <!-- Dropdown fits inside input when above -->
+                            <input id="search" type="search" required>
+                            <ul id="dropdown1" class="dropdown-content">
+                                <li><a href="#!">one</a></li>
+                                <li><a href="#!">two</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#!">three</a></li>
+                            </ul>
+                        </div>
+                    </form>
                 </div>
-            </div><!-- Col sm-8: search bar -->
-            <div class="col-sm-2"></div>
-        </div><!-- Row: search bar -->
-    </div><!-- Container: fluid -->
-
-</div><!-- Jumbotron -->
-
+            </nav>
+        </div>
+        <div class="col s2"></div>
+    </div>
+</div>
 
 
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/Users/Jordan/IdeaProjects/beer-app/feature/search_bar.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="custom.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.js"></script>
 </body>
 </html>
