@@ -16,6 +16,12 @@
     /*margin: 0 auto;*/
 }
 
+.nav-wrapper .input-field input[type=search] {
+    margin-left: 10rem;
+    padding-left: 0;
+    width: calc(100% - 10rem);
+}
+
 .border {
     border: 1px solid pink;
 }
