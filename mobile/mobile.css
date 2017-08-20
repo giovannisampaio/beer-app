@@ -1,8 +1,9 @@
-.logo-spacer {
-    width: 200px;
-    height: 50px;
-    background: #000;
-    margin: 35px auto 20px auto;
+.logo {
+  margin: 30px auto;
+  text-align: center;
+}
+.logo img{
+    max-width: 250px;
 }
 
 #query {
@@ -27,8 +28,8 @@
 }
 
 .card img {
-  width: 150px;
-  height: 150px;
+  max-width: 150px;
+  max-height: 150px;
   padding: 10px 40px;
 }
 
