@@ -25,3 +25,13 @@
 .border {
     border: 1px solid pink;
 }
+
+.card img {
+  width: 150px;
+  height: 150px;
+  padding: 10px 40px;
+}
+
+.card-content p {
+  text-align:left;
+}
