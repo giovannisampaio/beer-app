@@ -2,7 +2,7 @@
 -- then use  json_to_recordset(:'doc')
 
 -- create table mytable as select * from json_to_recordset('[...]') as s(a integer, b text);
-create table katt
+create table hejhej
 as select * from json_to_recordset(:'doc') as s(
     "nr" integer,
     "Artikelid" integer,
