@@ -1,3 +1,7 @@
+input.select-dropdown {
+    max-width: 80px;
+}
+
 .logo {
   margin: 30px auto;
   text-align: center;
@@ -18,9 +22,9 @@
 }
 
 .nav-wrapper .input-field input[type=search] {
-    margin-left: 10rem;
+    margin-left: 7rem;
     padding-left: 0;
-    width: calc(100% - 10rem);
+    width: calc(100% - 7rem);
 }
 
 .border {
@@ -36,3 +40,4 @@
 .card-content p {
   text-align:left;
 }
+

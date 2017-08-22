@@ -28,7 +28,11 @@
                         <div class="input-field grey lighten-3">
                             <ul class="left">
                                 <!-- Dropdown Trigger -->
-                                <li><a class="dropdown-button black-text" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+                                <li>
+                                    <select name="filter" id="filter">
+                                        <option value="name">Name</option>
+                                    </select>
+                                </li>
                             </ul>
                             <!-- Dropdown fits inside input when above -->
                             <input id="search" type="search" required>
@@ -87,7 +91,7 @@
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="custom.js"></script>
+<script type="text/javascript" src="search_bar.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.js"></script>
 </body>
 </html>
