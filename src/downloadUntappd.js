@@ -16,5 +16,5 @@ https.get(address + beer_method + bid + client_id + client_secret, function(res)
     res.setEncoding('utf8');
     var str = '';
     res.on('data', (d) => str += d);
-    res.on('end', () => console.log(JSON.stringify(str, null, 4)));
+    res.on('end', () => console.log(str));
 });
