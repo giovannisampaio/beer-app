@@ -31,17 +31,13 @@
                                 <li>
                                     <select name="filter" id="filter">
                                         <option value="name">Name</option>
+                                        <option value="origin">Origin</option>
+                                        <option value="style">Style</option>
                                     </select>
                                 </li>
                             </ul>
                             <!-- Dropdown fits inside input when above -->
-                            <input id="search" type="search" required>
-                            <ul id="dropdown1" class="dropdown-content">
-                                <li><a href="#!">one</a></li>
-                                <li><a href="#!">two</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#!">three</a></li>
-                            </ul>
+                            <input id="query" type="search" required>
                         </div>
                     </form>
                 </div>
@@ -52,6 +48,7 @@
 </div>
 <div class="container">
     <div class="row">
+        <div id="results">Results here</div>
         <div class="col s12 center">
             <div class="card horizontal">
               <div class="card-image">

@@ -1,6 +1,7 @@
 "use strict";
 $(document).ready(function() {
     $('select').material_select();
+
     //Dummy database of beers
     var beerDatabase = [
         {
@@ -35,12 +36,11 @@ $(document).ready(function() {
         const value = queryEl.value.trim();
 //if user input is not an empty string : filter through the beer DB for matching character, append to results
         resultsEl.innerHTML = ! value ? '' : beerDatabase
-            .filter(beer => beer[key].toLowerCase().indexOf(value.toLowerCase()) !== -1)
-    .map(({name, style, origin}) => `<div>${name}, ${style} (${origin})</div>`)
-    .reduce((html, template) => html + template, '')
+            .filter(beer => beer[key].toLowerCase().indexOf(value.toLowerCase()) !== -1).map(({name, style, origin}) => `<div>${name}, ${style} (${origin})</div>`).reduce((html, template) => html + template, '')
     }
 
     queryEl.addEventListener('input', search, false);
     filterEl.addEventListener('input', search, false);
+
 });
 
