@@ -3,6 +3,7 @@
 require('dotenv').config();
 var request = require('request');
 var https = require('https');
+var beerList = require('./products.json');
 
 var client_id = '&client_id=' + process.env.CLIENT_ID;
 var client_secret = '&client_secret=' + process.env.CLIENT_SECRET;
@@ -18,3 +19,6 @@ https.get(address + beer_method + bid + client_id + client_secret, function(res)
     res.on('data', (d) => str += d);
     res.on('end', () => console.log(str));
 });
+
+
+Object.keys(beerList).forEach(a => console.log(beerList[a]));
