@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width-device-width, initial-scale=1">
+    <title>Mobile Design</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+    <link rel="stylesheet" href="mobile.css">
+
+
+</head>
+<body>
+
+<div class="row grey lighten-2">
+    <div class="row">
+        <div class="col s12">
+            <div class="logo">
+              <img src="img/logo3.png">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s2"></div>
+        <div class="col s8 center">
+            <nav>
+                <div class="nav-wrapper">
+                    <form>
+                        <div class="input-field grey lighten-3">
+                            <ul class="left">
+                                <!-- Dropdown Trigger -->
+                                <li>
+                                    <select name="filter" id="filter">
+                                        <option value="name">Name</option>
+                                        <option value="origin">Origin</option>
+                                        <option value="style">Style</option>
+                                    </select>
+                                </li>
+                            </ul>
+                            <!-- Dropdown fits inside input when above -->
+                            <input id="query" type="search" required>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <div class="col s2"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div id="results">Results here</div>
+        <div class="col s12 center">
+            <div class="card horizontal">
+              <div class="card-image">
+                <img src="img/beer_2360.jpg">
+              </div>
+              <div class="card-content">
+                <div class="card-title">
+                  <p><b>Rochefort Trappistes 10</b></p>
+                </div>
+                  <p><b>Brewery:</b> Brasserie Rochefort </br>
+                  <p><b>Style:</b> Abt/Quadrupel </p>
+                  <p>Rochefort, Belgium </p>
+                  <p>Alcohol vol.: 6.66% </p>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 center">
+            <div class="card horizontal">
+              <div class="card-image">
+                <img src="img/beer_2360.jpg">
+              </div>
+              <div class="card-content">
+                <div class="card-title">
+                  <p><b>Rochefort Trappistes 10</b></p>
+                </div>
+                  <p><b>Brewery:</b> Brasserie Rochefort </br>
+                  <p><b>Style:</b> Abt/Quadrupel </p>
+                  <p>Rochefort, Belgium </p>
+                  <p>Alcohol vol.: 6.66% </p>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="search_bar.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.js"></script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Created by .ignore support plugin (hsz.mobi)
 
 # compiled output
@@ -120,3 +121,7 @@ sites/*/private
 #Intelli-J
 beer-app.iml
 .idea
+=======
+.idea
+*.iml
+>>>>>>> db9cf937a4767b398185e2d55d2c88f843724358

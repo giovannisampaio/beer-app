@@ -1,0 +1,43 @@
+input.select-dropdown {
+    max-width: 80px;
+}
+
+.logo {
+  margin: 30px auto;
+  text-align: center;
+}
+.logo img{
+    max-width: 250px;
+}
+
+#query {
+    width: 250px;
+    margin: 10px auto;
+}
+
+.container-1 {
+    position: relative;
+    max-width:500px;
+    /*margin: 0 auto;*/
+}
+
+.nav-wrapper .input-field input[type=search] {
+    margin-left: 7rem;
+    padding-left: 0;
+    width: calc(100% - 7rem);
+}
+
+.border {
+    border: 1px solid pink;
+}
+
+.card img {
+  max-width: 150px;
+  max-height: 150px;
+  padding: 10px 40px;
+}
+
+.card-content p {
+  text-align:left;
+}
+
