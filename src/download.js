@@ -24,6 +24,6 @@ function download(filename, url) {
 }
 
 
-download('stores', urls.stores);
+download('products', urls.products);
 
 
