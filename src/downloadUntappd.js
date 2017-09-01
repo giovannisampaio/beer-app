@@ -11,7 +11,6 @@ var client_secret = '&client_secret=' + process.env.CLIENT_SECRET;
 var token = '?access_token=' + process.env.TOKEN;
 var address = 'https://api.untappd.com/v4/';
 var beer_method = 'search/beer?q=';
-var bid = 'Schlappeseppel Dunkel';
 
 
 
@@ -20,17 +19,18 @@ function getName(num) {
         return false;
     }
     return beerList[num].Namn +
-           beerList[num].Namn2 ?
+           (beerList[num].Namn2 ?
            ' ' + beerList[num].Namn2 :
-           '';
+           '');
 }
 
 function getBID(name) {
     return new Promise(function(resolve, reject) {
         if (name) {
-        https.get(address + beer_method +
-              encodeURIComponent(name) +
-              client_id + client_secret,
+        https.get(
+            address + beer_method +
+            encodeURIComponent(name) +
+            client_id + client_secret,
 
             function(res) {
                 res.setEncoding('utf8');
@@ -53,21 +53,31 @@ function updateJSON(bid, num) {
     return new Promise(function(resolve, reject) {
         if (bid) {
             beerList[num].bid = bid;
+            if (beerList[num].bid == bid) {
+                resolve();
+            }
     }
-    resolve();
 });
 }
+
+// getBID(getName(0))
+// .then((x) => updateJSON(x, 0))
+// .then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));});
+
 
 function iterate(num) {
     return new Promise(function(resolve, reject) {
         for (var i = 0; i < num; i++) {
-            getBID(getName(num)).then((x) => updateJSON(x, i).then(i === num - 1 ? resolve() : false));
+            getBID(getName(i)).then((x) => updateJSON(x, i).then(() => {i === (num - 1) ? resolve() : false}));
         }
     });
 }
+iterate(4).then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));});
+// getBID(getName(0)).then((x) => updateJSON(x, 0)).then(fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4)));
+// getBID(getName(0)).then(console.log);
+// function jiterate() {
 
-iterate(4).then(fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4)));
-
+// }
 
 // https.get(address + beer_method + bid + client_id + client_secret, function(res) {
 //         res.setEncoding('utf8');
