@@ -25,14 +25,14 @@ function getName(num, arr) {
 }
 
 function getBID(name) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(resolve =>  {
         if (name) {
         https.get(
             address + beer_method +
             encodeURIComponent(name) +
             client_id + client_secret,
 
-            function(res) {
+            res => {
                 res.setEncoding('utf8');
                 var str = '';
                 res.on('data', (d) => str += d);
