@@ -24,7 +24,7 @@ function getName(num, arr) {
            '');
 }
 
-function getBID(name) {
+function updateBID(name) {
     return new Promise(resolve =>  {
         if (name) {
         https.get(
@@ -60,7 +60,7 @@ function updateJSON(bid, num, arr) {
 var iterate = (cur, ind, arr1) => {
     return new Promise(resolve =>
         setTimeout(() => {
-            resolve(getBID(getName(ind, arr1))
+            resolve(updateBID(getName(ind, arr1))
             .then((x) => updateJSON(x, ind, arr1)));
     }, (ind % 100 == 1) && (ind > 1) ? 60*60*1000 : 0));};
 
@@ -69,11 +69,11 @@ var results = Promise.all(ready);
 results.then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));});
 // beerList.map((cur, ind, arr1) => {
 //     setTimeout(() => {
-//         getBID(getName(ind, arr1))
+//         updateBID(getName(ind, arr1))
 //         .then((x) => updateJSON(x, ind, arr1));
 //     }, ind % 100 == 1? 60*60*1000 : 0);
 // }).then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));});
-// getBID(getName(0))
+// updateBID(getName(0))
 // .then((x) => updateJSON(x, 0))
 // .then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));});
 
@@ -81,14 +81,14 @@ results.then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, nu
 // function iterate(num) {
 //     return new Promise(function(resolve, reject) {
 //         for (var i = 0; i < num; i++) {
-//             getBID(getName(i)).then((x) => updateJSON(x, i).then(() => {i === (num - 1) ? resolve() : false}));
+//             updateBID(getName(i)).then((x) => updateJSON(x, i).then(() => {i === (num - 1) ? resolve() : false}));
 //             console.log(i);
 //         }
 //     });
 // }
 // iterate(4).then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));});
-// getBID(getName(0)).then((x) => updateJSON(x, 0)).then(fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4)));
-// getBID(getName(0)).then(console.log);
+// updateBID(getName(0)).then((x) => updateJSON(x, 0)).then(fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4)));
+// updateBID(getName(0)).then(console.log);
 // function jiterate() {
 
 // }
