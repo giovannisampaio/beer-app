@@ -12,18 +12,21 @@ var urls = {
 };
 
 function download(filename, url) {
+    return new Promise(resolve =>
     https.get(url, function(response) {
         var data = '';
         response.setEncoding('utf8');
         response.on('data', (chunk) => data += chunk);
         response.on('end', () => {
             fs.writeFileSync(filename + '.xml', data);
-            cleanup[filename]('./' + filename + '.xml', './' + filename + '.json');
+            resolve(cleanup[filename]('./' + filename + '.xml', './' + filename + '.json'));
                     });
-}).on('error', (e) => console.log(e));
+}).on('error', (e) => console.log(e)));
 }
 
 
-download('products', urls.products);
+download('products', urls.products).
+then(download('stores', urls.stores)).
+then(download('selection', urls.selection));
 
 
