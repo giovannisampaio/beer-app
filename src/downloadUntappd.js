@@ -10,7 +10,8 @@ var client_id = '&client_id=' + process.env.CLIENT_ID;
 var client_secret = '&client_secret=' + process.env.CLIENT_SECRET;
 var token = '?access_token=' + process.env.TOKEN;
 var address = 'https://api.untappd.com/v4/';
-var beer_method = 'search/beer?q=';
+var bid_search = 'search/beer?q=';
+var info_search = 'beer/info/';
 var counter = 0;
 var noBID = [];
 
@@ -28,15 +29,46 @@ function getName(num, arr) {
            arr[num].Namn + ' ' + Namn2.join(' ');
 }
 
+function updateInfo(bid) {
+    return new Promise(resolve =>  {
+        if (bid) {
+        https.get(
+            address + info_search + bid + token,
+
+            res => {
+                res.setEncoding('utf8');
+                var str = '';
+                counter++;
+                res.on('data', (d) => str += d);
+                res.on('end', () => {
+                    if (JSON.parse(str).response.beers.items[0]) {
+                        resolve(JSON.parse(str).response.beers.items[0].beer.bid);
+                    }
+                    else  {
+                        noBID.push(name);
+                        resolve();
+                    }
+                });
+            });
+    }
+    else {
+        resolve();
+    }
+    });
+}
+
 function updateBID(name) {
     return new Promise(resolve =>  {
         if (name) {
         https.get(
-            address + beer_method +
+            address + bid_search +
             encodeURIComponent(name) +
             client_id + client_secret,
 
             res => {
+                console.log(address + bid_search +
+            encodeURIComponent(name) +
+            client_id + client_secret);
                 res.setEncoding('utf8');
                 var str = '';
                 counter++;
