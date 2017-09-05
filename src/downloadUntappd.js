@@ -11,7 +11,8 @@ var client_secret = '&client_secret=' + process.env.CLIENT_SECRET;
 var token = '?access_token=' + process.env.TOKEN;
 var address = 'https://api.untappd.com/v4/';
 var beer_method = 'search/beer?q=';
-
+var counter = 0;
+var noBID = [];
 
 
 function getName(num, arr) {
@@ -35,11 +36,16 @@ function updateBID(name) {
             res => {
                 res.setEncoding('utf8');
                 var str = '';
+                counter++;
                 res.on('data', (d) => str += d);
                 res.on('end', () => {
-                    JSON.parse(str).response.beers.items[0] ?
-                    resolve(JSON.parse(str).response.beers.items[0].beer.bid) :
-                    resolve(false);
+                    if (JSON.parse(str).response.beers.items[0]) {
+                        resolve(JSON.parse(str).response.beers.items[0].beer.bid);
+                    }
+                    else  {
+                        noBID.push(name);
+                        resolve();
+                    }
                 });
             });
     }
@@ -62,11 +68,13 @@ var iterate = (cur, ind, arr1) => {
         setTimeout(() => {
             resolve(updateBID(getName(ind, arr1))
             .then((x) => updateJSON(x, ind, arr1)));
-    }, (ind % 100 == 1) && (ind > 1) ? 60*60*1000 : 0));};
+    }, (counter % 100 == 1) && (counter > 1) ? 60*60*1000 : 0));};
 
 var ready = beerList.map(iterate);
 var results = Promise.all(ready);
-results.then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));});
+results.then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));
+    console.log(JSON.stringify(noBID)).catch(console.log);
+});
 // beerList.map((cur, ind, arr1) => {
 //     setTimeout(() => {
 //         updateBID(getName(ind, arr1))
