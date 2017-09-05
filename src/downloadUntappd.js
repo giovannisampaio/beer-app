@@ -50,7 +50,7 @@ function updateBID(name) {
             });
     }
     else {
-        resolve(false);
+        resolve();
     }
     });
 }
