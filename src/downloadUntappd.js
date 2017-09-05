@@ -16,13 +16,16 @@ var noBID = [];
 
 
 function getName(num, arr) {
-    if(arr[num].bid) {
-        return false;
-    }
-    return arr[num].Namn +
-           (arr[num].Namn2 ?
-           ' ' + arr[num].Namn2 :
-           '');
+    var Namn2 = !arr[num].Namn2 ?
+                '' :
+                arr[num].Namn2.split(' ');
+    return arr[num].bid ?
+           false :
+           !Namn2 ?
+           arr[num].Namn :
+           Namn2.length > 2 ?
+           arr[num].Namn + ' ' + Namn2[0] + ' ' + Namn2[1] :
+           arr[num].Namn + ' ' + Namn2.join(' ');
 }
 
 function updateBID(name) {
@@ -60,6 +63,7 @@ function updateJSON(bid, num, arr) {
         if (bid) {
             resolve(arr[num].bid = bid);
     }
+        resolve();
 });
 }
 
@@ -73,7 +77,7 @@ var iterate = (cur, ind, arr1) => {
 var ready = beerList.map(iterate);
 var results = Promise.all(ready);
 results.then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));
-    console.log(JSON.stringify(noBID)).catch(console.log);
+    console.log(JSON.stringify(noBID));
 });
 // beerList.map((cur, ind, arr1) => {
 //     setTimeout(() => {
