@@ -76,8 +76,9 @@ var iterate = (cur, ind, arr1) => {
 
 var ready = beerList.map(iterate);
 var results = Promise.all(ready);
-results.then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));
-    console.log(JSON.stringify(noBID));
+results.then(() => {
+    fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));
+    fs.writeFile('./noBID.json', JSON.stringify(noBID, null, 4));
 });
 // beerList.map((cur, ind, arr1) => {
 //     setTimeout(() => {
