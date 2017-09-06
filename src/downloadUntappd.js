@@ -17,17 +17,26 @@ var noBID = [];
 var noInfo = [];
 
 
-function getName(num, arr) {
-    var Namn2 = !arr[num].Namn2 ?
+function getName(beer) {
+    var Namn2 = !beer.Namn2 ?
                 '' :
-                arr[num].Namn2.split(' ');
-    return arr[num].bid ?
+                beer.Namn2.split(' ');
+    return beer.bid ?
            false :
            !Namn2 ?
-           arr[num].Namn :
+           beer.Namn :
            Namn2.length > 2 ?
-           arr[num].Namn + ' ' + Namn2[0] + ' ' + Namn2[1] :
-           arr[num].Namn + ' ' + Namn2.join(' ');
+           beer.Namn + ' ' + Namn2[0] + ' ' + Namn2[1] :
+           beer.Namn + ' ' + Namn2.join(' ');
+}
+
+function getUnspecificName(beer) {
+    return beer.Namn;
+}
+
+function getSpecificName(beer) {
+    var producent = beer.Producent.split(' ');
+    return producent[0] + ' ' + beer.Namn;
 }
 
 function getInfo(bid, name) {
@@ -59,7 +68,7 @@ function getInfo(bid, name) {
     });
 }
 
-function getBID(name) {
+function getBID(name, cur) {
     return new Promise(resolve =>  {
         if (name) {
         https.get(
@@ -73,8 +82,9 @@ function getBID(name) {
                 counter++;
                 res.on('data', (d) => str += d);
                 res.on('end', () => {
-                    if (JSON.parse(str).response.beers.items[0]) {
-                        resolve(JSON.parse(str).response.beers.items[0].beer.bid);
+                    var bid = validate(JSON.parse(str).response, cur);
+                    if (bid) {
+                        resolve(bid);
                     }
                     else  {
                         noBID.push(name);
@@ -87,6 +97,25 @@ function getBID(name) {
         resolve();
     }
     });
+}
+
+// "Alkoholhalt": "9.50%",
+// parseFloat('9.50%').toString()
+
+function validate(data, cur) {
+    if (data.found === 0) {
+        return getBID(getUnspecificName(cur));
+    }
+    if (data.found > 10) {
+        return getBID(getSpecificName(cur));
+    }
+    if (data.beers.items[0].beer_abv ===
+        parseFloat(cur.Alkoholhalt).toString()) {
+            return data.beers.items.beer[0].bid;
+    }
+    else {
+        return false;
+    }
 }
 
 function updateBID(bid, num, arr) {
@@ -111,13 +140,13 @@ function timer(func, cur, ind, arr1) {
     return new Promise(resolve =>
         setTimeout(() => {
             resolve(func(cur, ind, arr1));
-        }, (counter % 99 === 0) ? 60*60*1000 : 0)
+        }, (counter % 99 === 0) && (counter > 0) ? 60*60*1000 : 0)
         );
 }
 
 function resolver(cur, ind, arr1) {
-    var name = getName(ind, arr1);
-    return getBID(name)
+    var name = getName(cur);
+    return getBID(name, cur)
     .then((BID) => updateBID(BID, ind, arr1))
     .then((BID) => getInfo(BID, name)
     .then((info1) =>  updateInfo(info1, ind, arr1)));
