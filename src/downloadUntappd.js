@@ -14,6 +14,7 @@ var bid_search = 'search/beer?q=';
 var info_search = 'beer/info/';
 var counter = 0;
 var noBID = [];
+var noInfo = [];
 
 
 function getName(num, arr) {
@@ -29,11 +30,12 @@ function getName(num, arr) {
            arr[num].Namn + ' ' + Namn2.join(' ');
 }
 
-function updateInfo(bid) {
+function getInfo(bid, name) {
     return new Promise(resolve =>  {
         if (bid) {
         https.get(
-            address + info_search + bid + token,
+            address + info_search +
+            bid + token + '&compact=true',
 
             res => {
                 res.setEncoding('utf8');
@@ -41,11 +43,11 @@ function updateInfo(bid) {
                 counter++;
                 res.on('data', (d) => str += d);
                 res.on('end', () => {
-                    if (JSON.parse(str).response.beers.items[0]) {
-                        resolve(JSON.parse(str).response.beers.items[0].beer.bid);
+                    if (JSON.parse(str).response.beer) {
+                        resolve(JSON.parse(str).response.beer);
                     }
                     else  {
-                        noBID.push(name);
+                        noInfo.push(name);
                         resolve();
                     }
                 });
@@ -57,7 +59,7 @@ function updateInfo(bid) {
     });
 }
 
-function updateBID(name) {
+function getBID(name) {
     return new Promise(resolve =>  {
         if (name) {
         https.get(
@@ -66,9 +68,6 @@ function updateBID(name) {
             client_id + client_secret,
 
             res => {
-                console.log(address + bid_search +
-            encodeURIComponent(name) +
-            client_id + client_secret);
                 res.setEncoding('utf8');
                 var str = '';
                 counter++;
@@ -90,7 +89,7 @@ function updateBID(name) {
     });
 }
 
-function updateJSON(bid, num, arr) {
+function updateBID(bid, num, arr) {
     return new Promise(resolve =>  {
         if (bid) {
             resolve(arr[num].bid = bid);
@@ -99,41 +98,55 @@ function updateJSON(bid, num, arr) {
 });
 }
 
+function updateInfo(info, num, arr) {
+    return new Promise(resolve => {
+        if(info) {
+            resolve(arr[num].info = info);
+        }
+        resolve();
+    });
+}
+
 var iterate = (cur, ind, arr1) => {
     return new Promise(resolve =>
         setTimeout(() => {
-            resolve(updateBID(getName(ind, arr1))
-            .then((x) => updateJSON(x, ind, arr1)));
+            var name = getName(ind, arr1);
+            resolve(getBID(name)
+            .then((BID) => updateBID(BID, ind, arr1))
+            .then((BID) => getInfo(BID, name)
+            .then((info1) =>  updateInfo(info1, ind, arr1))));
     }, (counter % 100 == 1) && (counter > 1) ? 60*60*1000 : 0));};
+
 
 var ready = beerList.map(iterate);
 var results = Promise.all(ready);
 results.then(() => {
     fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));
     fs.writeFile('./noBID.json', JSON.stringify(noBID, null, 4));
+    fs.writeFile('./noInfo.json', JSON.stringify(noInfo, null, 4));
 });
 // beerList.map((cur, ind, arr1) => {
 //     setTimeout(() => {
-//         updateBID(getName(ind, arr1))
-//         .then((x) => updateJSON(x, ind, arr1));
+//         getBID(getName(ind, arr1))
+//         .then((x) => updateBID(x, ind, arr1));
 //     }, ind % 100 == 1? 60*60*1000 : 0);
 // }).then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));});
-// updateBID(getName(0))
-// .then((x) => updateJSON(x, 0))
+// getBID(getName(0))
+// .then((x) => updateBID(x, 0))
 // .then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));});
 
 
 // function iterate(num) {
 //     return new Promise(function(resolve, reject) {
 //         for (var i = 0; i < num; i++) {
-//             updateBID(getName(i)).then((x) => updateJSON(x, i).then(() => {i === (num - 1) ? resolve() : false}));
+//             getBID(getName(i)).then((x) => updateBID(x, i).then(() => {i === (num - 1) ? resolve() : false}));
 //             console.log(i);
 //         }
 //     });
 // }
 // iterate(4).then(() => {fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4));});
-// updateBID(getName(0)).then((x) => updateJSON(x, 0)).then(fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4)));
-// updateBID(getName(0)).then(console.log);
+// getBID(getName(0)).then((x) => updateBID(x, 0)).then(fs.writeFile('./products2.json', JSON.stringify(beerList, null, 4)));
+// getBID(getName(0)).then(console.log);
 // function jiterate() {
 
 // }
