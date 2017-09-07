@@ -1,8 +1,8 @@
-\set doc `cat ./products.json`
+﻿--run on console with psql \set doc `cat ./products.json`
 -- then use  json_to_recordset(:'doc')
 
 -- create table mytable as select * from json_to_recordset('[...]') as s(a integer, b text);
-create table hejhej
+create table beer_table
 as select * from json_to_recordset(:'doc') as s(
     "nr" integer,
     "Artikelid" integer,

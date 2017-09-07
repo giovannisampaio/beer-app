@@ -1,0 +1,32 @@
+{
+  "name": "beer-app",
+  "version": "1.0.0",
+  "description": "B2L project for Chingu Voyage",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giovannisampaio/beer-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/giovannisampaio/beer-app/issues"
+  },
+  "homepage": "https://github.com/giovannisampaio/beer-app#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2",
+    "pg": "^7.2.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
