@@ -30,8 +30,25 @@ as select * from json_to_recordset(:'doc') as s(
     "SortimentText" text,
     "Ekologisk" integer,
     "Etiskt" integer,
-    "Koscher" integer
-    );
-
-
-
+    "Koscher" integer,
+    "bid" integer,
+    "beer_name" text,
+    "beer_label" text,
+    "beer_label_hd" text,
+    "beer_abv" numeric,
+    "beer_ibu" integer,
+    "beer_description" text,
+    "beer_style" text,
+    "is_in_production" integer,
+    "beer_slug" text,
+    "is_homebrew" integer,
+    "created_at" text,
+    "rating_count" integer,
+    "rating_score" numeric,
+    "stats" text,
+    "brewery" text,
+    "auth_rating" integer,
+    "wish_list" text,
+    "weighted_rating_score" numeric,
+    "vintages" text,
+    )
