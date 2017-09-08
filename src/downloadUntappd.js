@@ -3,8 +3,9 @@
 require('dotenv').config();
 var request = require('request');
 var https = require('https');
-var beerList = require('./products5.json');
+var beerList = require('./fs.json');
 var fs = require('fs');
+var merge = require('merge');
 
 var client_id = '&client_id=' + process.env.CLIENT_ID;
 var client_secret = '&client_secret=' + process.env.CLIENT_SECRET;
@@ -52,10 +53,10 @@ function getInfo(bid, name) {
                     }
                 });
             });
-    }
-    else {
-        resolve();
-    }
+        }
+        else {
+            resolve();
+        }
     });
 }
 
@@ -82,10 +83,10 @@ function getBID(name) {
                     }
                 });
             });
-    }
-    else {
-        resolve();
-    }
+        }
+        else {
+            resolve();
+        }
     });
 }
 
@@ -93,15 +94,15 @@ function updateBID(bid, num, arr) {
     return new Promise(resolve =>  {
         if (bid) {
             resolve(arr[num].bid = bid);
-    }
+        }
         resolve();
-});
+    });
 }
 
 function updateInfo(info, num, arr) {
     return new Promise(resolve => {
         if(info) {
-            resolve(arr[num].info = info);
+            resolve(arr[num] = merge(arr[num], info));
         }
         resolve();
     });
@@ -111,8 +112,8 @@ function timer(func, cur, ind, arr1) {
     return new Promise(resolve =>
         setTimeout(() => {
             resolve(func(cur, ind, arr1));
-        }, (counter % 99 === 0) ? 60*60*1000 : 0)
-        );
+        }, (counter % 99 === 0) && (counter > 0) ? 60*60*1000 : 0)
+    );
 }
 
 function resolver(cur, ind, arr1) {
@@ -131,7 +132,7 @@ var iterate = (cur, ind, arr1) => {
 var ready = beerList.map(iterate);
 var results = Promise.all(ready);
 results.then(() => {
-    fs.writeFile('./products4.json', JSON.stringify(beerList, null, 4));
+    fs.writeFile('beersFS_both_API.json', JSON.stringify(beerList, null, 4));
     fs.writeFile('./noBID.json', JSON.stringify(noBID, null, 4));
     fs.writeFile('./noInfo.json', JSON.stringify(noInfo, null, 4));
 });
