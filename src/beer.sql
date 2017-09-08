@@ -1,8 +1,8 @@
-\set doc `cat ./products.json`
+\set doc `cat ./beersFS_both_API1.json`
 -- then use  json_to_recordset(:'doc')
 
 -- create table mytable as select * from json_to_recordset('[...]') as s(a integer, b text);
-create table hejhej
+create table 49beers
 as select * from json_to_recordset(:'doc') as s(
     "nr" integer,
     "Artikelid" integer,
