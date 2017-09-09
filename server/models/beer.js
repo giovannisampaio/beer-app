@@ -6,6 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true,
       primaryKey: true
+
     },
     Artikelid: {
       type: DataTypes.INTEGER,
@@ -109,6 +110,86 @@ module.exports = function(sequelize, DataTypes) {
     },
     Koscher: {
       type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    bid: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    beer_name: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    beer_label: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    beer_label_hd: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    beer_abv: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
+    },
+    beer_ibu: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    beer_description: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    beer_style: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    is_in_production: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    beer_slug: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    is_homebrew: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    created_at: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    rating_count: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    rating_score: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
+    },
+    stats: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    brewery: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    auth_rating: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    wish_list: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    weighted_rating_score: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
+    },
+    vintages: {
+      type: DataTypes.TEXT,
       allowNull: true
     }
   }, {
