@@ -27,10 +27,9 @@
     border: 1px solid pink;
 }
 
-.card img {
+.card-img {
   max-width: 150px;
   max-height: 150px;
-  padding: 10px 40px;
 }
 
 .card-content p {
